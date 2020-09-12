@@ -1,67 +1,15 @@
-# WORKSPACE TEMPLATE
+<img src="example/snapshots/wcag-contrast/preview.svg"/>
 
-## Start web project
+# 목표
 
-```sh
-# create a workspace directory
-npx generate-github-directory https://github.com/rocket-hangar/workspace-template my-project
-cd my-project
+1. 예제로 주어진 Material-UI의 Color Palette의 WCAG Contrast Ratio 접근성을 계산합니다.
+2. Git Pre-Commit Hook을 사용해서 Report를 작성합니다. (CI 상에서는 Report 파일들의 저장 문제 등 Back-End 비용이 발생하므로 Pre-Commit 상에서 진행합니다.)
+3. CI (Github Actions) 에 PR이 발생하면 `master` Branch의 Report와 PR의 Report를 비교해서 Score 증감을 계산합니다.
+4. Report의 증감이 있는 경우 PR에 Comment를 자동으로 달아줍니다.
 
-# create an app
-npx generate-github-directory https://github.com/rocket-hangar/rocket-scripts-templates/tree/master/templates/web my-app
+# TODOs
 
-# add "my-app" to workspaces of package.json
-
-# install
-yarn
-
-# start
-cd my-app
-
-# start
-yarn run start
-```
-
-## Start electron project
-
-```sh
-# create a workspace directory
-npx generate-github-directory https://github.com/rocket-hangar/workspace-template my-project
-cd my-project
-
-# create an app
-npx generate-github-directory https://github.com/rocket-hangar/rocket-scripts-templates/tree/master/templates/electron my-app
-
-# add "my-app" to workspaces of package.json
-
-# install
-yarn
-
-# directory
-cd my-app
-
-# start
-yarn run start
-```
-
-## Start multi-packages project
-
-```sh
-# create a workspace directory
-npx generate-github-directory https://github.com/rocket-hangar/workspace-template my-project
-cd my-project
-
-# create an app
-npx generate-github-directory https://github.com/rocket-hangar/rocket-punch-templates/tree/master/templates/packages my-packages
-
-# add "my-packages" to workspaces of package.json
-
-# install
-yarn
-
-# start
-cd my-packages
-
-# start
-yarn run test
-```
+- [x] WCAG Contrast Ratio Report
+- [x] Git Pre-Commit Hook
+- [ ] Github Sticky Comment Library
+- [ ] Github Action Bot
