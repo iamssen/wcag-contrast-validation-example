@@ -1,6 +1,6 @@
 import { analyzeWCAGContrast } from '@app/anlayze-wcag-contrast';
 import { execSync } from 'child_process';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import { renderToString } from 'react-dom/server';
 import { dark } from 'style/theme';
@@ -16,7 +16,8 @@ const { scores, svg } = analyzeWCAGContrast(background, [primary, secondary]);
 const nextScores: string = JSON.stringify({ scores, preview: 'preview.svg' });
 const prevScores: string | undefined = fs.existsSync(previewJson) ? fs.readFileSync(previewJson, 'utf8') : undefined;
 
-if (nextScores !== prevScores) {
+if (!prevScores || nextScores !== prevScores) {
+  fs.mkdirpSync(store);
   fs.writeFileSync(previewSvg, renderToString(svg), 'utf8');
   fs.writeFileSync(previewJson, JSON.stringify({
     scores,
