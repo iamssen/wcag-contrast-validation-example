@@ -13,7 +13,7 @@ module.exports = {
       // validate
       `yarn workspace example run validate-wcag-contrast`,
       // run workspaces precommit hook
-      //...precommit(`source`),
+      ...precommit(`example`),
     ].join(' && '),
   },
 };
