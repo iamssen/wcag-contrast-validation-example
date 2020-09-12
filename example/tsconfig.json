@@ -1,0 +1,10 @@
+{
+  "extends": "@rocket-scripts/web/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": [
+    "src",
+    "scripts"
+  ]
+}

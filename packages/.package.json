@@ -1,0 +1,13 @@
+{
+  "author": "Name <id@mail.com>",
+  "license": "MIT",
+  "repository": "github:id/repo",
+  "bugs": "https://github.com/id/repo/issues",
+  "homepage": "https://github.com/id/repo/tree/master/source/src/{name}",
+  "engines": {
+    "node": ">=10"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

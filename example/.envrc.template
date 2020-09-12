@@ -1,0 +1,7 @@
+# cp .envrc.template .envrc
+# direnv allow .
+# or set your system envs
+
+# sentry
+# ------------------------------
+# export SENTRY_DSN=""
