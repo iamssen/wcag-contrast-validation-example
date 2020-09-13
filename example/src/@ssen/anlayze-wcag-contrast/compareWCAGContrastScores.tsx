@@ -1,5 +1,5 @@
 import { Scores } from '@ssen/anlayze-wcag-contrast/analyzeWCAGContrast';
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 export interface WCAGContrastScoresDiff {
   element: ReactElement;
@@ -23,15 +23,19 @@ export async function compareWCAGContrastScores(
     <table>
       <thead>
         <tr>
-          <th>master</th>
-          <th>current</th>
+          <th>base background</th>
+          <th>base paper</th>
+          <th>change background</th>
+          <th>change paper</th>
         </tr>
       </thead>
       <tbody>
         {keys.map((key) => (
           <tr key={key}>
-            <td>{base[key] ?? '-'}</td>
-            <td>{change[key] ?? '-'}</td>
+            <td>{base[key]?.background ?? '-'}</td>
+            <td>{base[key]?.paper ?? '-'}</td>
+            <td>{change[key]?.background ?? '-'}</td>
+            <td>{change[key]?.paper ?? '-'}</td>
           </tr>
         ))}
       </tbody>
