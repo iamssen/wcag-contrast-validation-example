@@ -22,15 +22,17 @@ export async function compareWCAGContrastScores(
   const element: ReactElement = (
     <table>
       <thead>
-        <th>master</th>
-        <th>current</th>
+        <tr>
+          <th>master</th>
+          <th>current</th>
+        </tr>
       </thead>
       <tbody>
         {keys.map((key) => (
-          <Fragment key={key}>
+          <tr key={key}>
             <td>{base[key] ?? '-'}</td>
             <td>{change[key] ?? '-'}</td>
-          </Fragment>
+          </tr>
         ))}
       </tbody>
     </table>
