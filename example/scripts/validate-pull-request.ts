@@ -12,16 +12,25 @@ import { renderToString } from 'react-dom/server';
   const repo = context.payload.repository?.name;
   const issue_number: number | undefined = context.payload.pull_request?.number;
   const commit_sha = context.sha;
+  
+  console.log('validate-pull-request.ts..()', {
+    owner,
+    repo,
+    issue_number,
+    commit_sha,
+  });
 
   if (!githubToken) {
-    throw new Error(`Undefined GITHUB_TOKEN`);
+    console.error(`Undefined GITHUB_TOKEN`);
+    process.exit(1);
   } else if (
     !owner ||
     !repo ||
     !commit_sha ||
     typeof issue_number !== 'number'
   ) {
-    throw new Error(`Only run this script on github action of master commit`);
+    console.error(`Only run this script on github action of master commit`);
+    process.exit(1);
   }
 
   try {
@@ -52,5 +61,8 @@ import { renderToString } from 'react-dom/server';
       stickyComment: `# WCAG CONTRAST RATIO`,
       body: `${elementString}\n\n${image}`,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 })();
