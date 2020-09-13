@@ -24,33 +24,33 @@ const scoreFontSize: number = 70;
 const colorFontSize: number = 18;
 
 export function analyzeWCAGContrast({
-                                      backgroundColor,
-                                      paperColor,
-                                      colors,
-                                    }: AnalyzeWCAGContrastParams): WCAGContrastReport {
+  backgroundColor,
+  paperColor,
+  colors,
+}: AnalyzeWCAGContrastParams): WCAGContrastReport {
   const scores: Record<string, Scores> = {};
   const elements: ReactNodeArray = [];
-  
+
   const colorNames: string[] = Object.keys(colors);
-  
+
   let i: number = -1;
   const max: number = colorNames.length;
-  
+
   while (++i < max) {
     const colorName: string = colorNames[i];
     const color: string = colors[colorName];
-    
+
     const backgroundScore: Score = score(hex(backgroundColor, color));
     const paperScore: Score = score(hex(paperColor, color));
-    
+
     scores[colorName] = {
       background: backgroundScore,
       paper: paperScore,
     };
-    
+
     elements.push(
       <g key={color} transform={`translate(0 ${(height + margin) * i})`}>
-        <rect width={width} height={height} fill={backgroundColor}/>
+        <rect width={width} height={height} fill={backgroundColor} />
         <text x={20} y={80} fontSize={scoreFontSize} fill={color}>
           {backgroundScore}
         </text>
@@ -64,7 +64,7 @@ export function analyzeWCAGContrast({
           {colorName.toUpperCase()} {backgroundColor.toUpperCase()}{' '}
           {color.toUpperCase()}
         </text>
-        
+
         <rect
           x={width / 2}
           y={10}
@@ -88,7 +88,7 @@ export function analyzeWCAGContrast({
       </g>,
     );
   }
-  
+
   return {
     scores,
     svg: (

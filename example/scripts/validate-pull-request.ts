@@ -10,8 +10,7 @@ import { renderToString } from 'react-dom/server';
   const githubToken: string | undefined = process.env.GITHUB_TOKEN;
   const base_owner: string | undefined =
     context.payload.pull_request?.base?.repo?.owner?.login;
-  const base_sha: string | undefined =
-    context.payload.pull_request?.base?.repo?.sha;
+  const base_sha: string | undefined = context.payload.pull_request?.base?.sha;
   const send_owner: string = context.actor;
   const send_sha: string = context.sha;
   const repo: string | undefined =

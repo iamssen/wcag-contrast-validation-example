@@ -10,26 +10,28 @@ export interface CommitCommentParams {
 }
 
 export async function commitComment({
-                                      githubToken,
-                                      owner,
-                                      repo,
-                                      commit_sha,
-                                      stickyComment,
-                                      body,
-                                    }: CommitCommentParams) {
+  githubToken,
+  owner,
+  repo,
+  commit_sha,
+  stickyComment,
+  body,
+}: CommitCommentParams) {
   const octokit = new Octokit({
     auth: githubToken,
   });
-  
+
   if (typeof stickyComment === 'string') {
     const comments = await octokit.repos.listCommentsForCommit({
       owner,
       repo,
       commit_sha,
     });
-    
-    const prevComment = comments.data.find(comment => comment.body.indexOf(stickyComment) === 0);
-    
+
+    const prevComment = comments.data.find(
+      (comment) => comment.body.indexOf(stickyComment) === 0,
+    );
+
     if (prevComment) {
       await octokit.repos.updateCommitComment({
         owner,

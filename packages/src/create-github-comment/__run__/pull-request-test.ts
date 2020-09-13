@@ -12,7 +12,7 @@ import { issueComment } from 'create-github-comment/issueComment';
   //  stickyComment: `> [COMMENT BOT] DO NOT EDIT THIS COMMENT MANUALLY\n`,
   //  body: `random: ${Math.floor(Math.random() * 1000)}`,
   //});
-  
+
   // ---------------------------------------------
   // pull request
   // ---------------------------------------------
@@ -24,7 +24,7 @@ import { issueComment } from 'create-github-comment/issueComment';
     stickyComment: `> [COMMENT BOT] DO NOT EDIT THIS COMMENT MANUALLY\n`,
     body: `random: ${Math.floor(Math.random() * 1000)}`,
   });
-  
+
   // ---------------------------------------------
   // commit
   // ---------------------------------------------

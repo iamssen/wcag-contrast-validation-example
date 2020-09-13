@@ -10,26 +10,28 @@ export interface IssueCommentParams {
 }
 
 export async function issueComment({
-                                     githubToken,
-                                     owner,
-                                     repo,
-                                     issue_number,
-                                     stickyComment,
-                                     body,
-                                   }: IssueCommentParams) {
+  githubToken,
+  owner,
+  repo,
+  issue_number,
+  stickyComment,
+  body,
+}: IssueCommentParams) {
   const octokit = new Octokit({
     auth: githubToken,
   });
-  
+
   if (typeof stickyComment === 'string') {
     const comments = await octokit.issues.listComments({
       owner,
       repo,
       issue_number,
     });
-    
-    const prevComment = comments.data.find(comment => comment.body.indexOf(stickyComment) === 0);
-    
+
+    const prevComment = comments.data.find(
+      (comment) => comment.body.indexOf(stickyComment) === 0,
+    );
+
     if (prevComment) {
       await octokit.issues.updateComment({
         owner,

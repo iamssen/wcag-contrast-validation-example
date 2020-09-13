@@ -1,5 +1,7 @@
 function precommit(...workspaces) {
-  return workspaces.map((workspace) => `yarn workspace ${workspace} run precommit`);
+  return workspaces.map(
+    (workspace) => `yarn workspace ${workspace} run precommit`,
+  );
 }
 
 module.exports = {
