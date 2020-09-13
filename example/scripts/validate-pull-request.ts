@@ -29,7 +29,14 @@ import { renderToString } from 'react-dom/server';
     !repo ||
     typeof issue_number !== 'number'
   ) {
-    console.error(`Only run this script on github action of pull request`);
+    console.error(`Only run this script on github action of pull request`, {
+      base_owner,
+      base_sha,
+      send_owner,
+      send_sha,
+      repo,
+      issue_number,
+    });
     process.exit(1);
   }
 
