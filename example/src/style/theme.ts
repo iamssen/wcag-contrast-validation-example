@@ -8,13 +8,13 @@ export const dark: Theme = createMuiTheme({
       paper: '#333333',
     },
     primary: {
-      main: '#90caf9',
+      main: '#2d4d62',
     },
     secondary: {
-      main: '#f48fb1',
+      main: '#c63c6e',
     },
     error: {
-      main: '#f44336',
+      main: '#69413b',
     },
     warning: {
       main: '#ff9800',
