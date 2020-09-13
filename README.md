@@ -7,11 +7,13 @@
 3. CI (Github Actions) 에 PR이 발생하면 `master` Branch의 Report와 PR의 Report를 비교해서 Score 증감을 계산합니다.
 4. Report의 증감이 있는 경우 PR에 Comment를 자동으로 달아줍니다.
 
+# Previews
+
+
+
 # TODOs
 
 - [x] WCAG Contrast Ratio Report
 - [x] Git Pre-Commit Hook
 - [x] Github Sticky Comment Library
-- [ ] Github Action Bot
-
-# Changes Pull Request
+- [x] Github Action Bot
