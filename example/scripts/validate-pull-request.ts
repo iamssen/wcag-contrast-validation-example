@@ -8,17 +8,12 @@ import { renderToString } from 'react-dom/server';
 
 (async () => {
   const githubToken = process.env.GITHUB_TOKEN;
-  const owner = context.payload.repository?.owner?.name;
-  const repo = context.payload.repository?.name;
+  const owner = context.repo.owner;
+  const repo = context.repo.repo;
   const issue_number: number | undefined = context.payload.pull_request?.number;
   const commit_sha = context.sha;
-  
-  console.log('validate-pull-request.ts..()', {
-    owner,
-    repo,
-    issue_number,
-    commit_sha,
-  });
+
+  console.log('validate-pull-request.ts..()', JSON.stringify(context, null, 2));
 
   if (!githubToken) {
     console.error(`Undefined GITHUB_TOKEN`);
