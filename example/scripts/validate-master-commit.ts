@@ -1,9 +1,5 @@
 import { context } from '@actions/github';
-import { analyzeWCAGContrast } from '@ssen/anlayze-wcag-contrast';
 import { commitComment } from 'create-github-comment';
-import svgToMiniDataURI from 'mini-svg-data-uri';
-import { renderToString } from 'react-dom/server';
-import { dark } from 'style/theme';
 
 (async () => {
   const githubToken = process.env.GITHUB_TOKEN;
@@ -17,22 +13,23 @@ import { dark } from 'style/theme';
     throw new Error(`Only run this script on github action of master commit`);
   }
   
-  const { background, primary, secondary, error, warning, info, success } = dark.palette;
-  
-  const { svg } = analyzeWCAGContrast({
-    backgroundColor: background.default,
-    paperColor: background.paper,
-    colors: {
-      primary: primary.main,
-      secondary: secondary.main,
-      error: error.main,
-      warning: warning.main,
-      info: info.main,
-      success: success.main,
-    },
-  });
-  
-  const image: string = svgToMiniDataURI(renderToString(svg));
+  // FIXME github does not support <img src="data-uri" />
+  //const { background, primary, secondary, error, warning, info, success } = dark.palette;
+  //
+  //const { svg } = analyzeWCAGContrast({
+  //  backgroundColor: background.default,
+  //  paperColor: background.paper,
+  //  colors: {
+  //    primary: primary.main,
+  //    secondary: secondary.main,
+  //    error: error.main,
+  //    warning: warning.main,
+  //    info: info.main,
+  //    success: success.main,
+  //  },
+  //});
+  //
+  //const image: string = svgToMiniDataURI(renderToString(svg));
   
   await commitComment({
     githubToken,
@@ -40,6 +37,6 @@ import { dark } from 'style/theme';
     repo,
     commit_sha,
     stickyComment: `# WCAG CONTRAST RATIO`,
-    body: `<img src="${image}"/>`,
+    body: `<img src="https://raw.githubusercontent.com/${owner}/${repo}/${commit_sha}/example/snapshots/wcag-contrast/preview.svg"/>`,
   });
 })();
