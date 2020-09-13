@@ -4,11 +4,23 @@ import { issueComment } from 'create-github-comment/issueComment';
   // ---------------------------------------------
   // issue
   // ---------------------------------------------
+  //await issueComment({
+  //  githubToken: process.env.GITHUB_TOKEN ?? '',
+  //  owner: 'iamssen',
+  //  repo: 'wcag-contrast-validation-example',
+  //  issue_number: 1,
+  //  stickyComment: `> [COMMENT BOT] DO NOT EDIT THIS COMMENT MANUALLY\n`,
+  //  body: `random: ${Math.floor(Math.random() * 1000)}`,
+  //});
+  
+  // ---------------------------------------------
+  // pull request
+  // ---------------------------------------------
   await issueComment({
     githubToken: process.env.GITHUB_TOKEN ?? '',
     owner: 'iamssen',
     repo: 'wcag-contrast-validation-example',
-    issue_number: 1,
+    issue_number: 2,
     stickyComment: `> [COMMENT BOT] DO NOT EDIT THIS COMMENT MANUALLY\n`,
     body: `random: ${Math.floor(Math.random() * 1000)}`,
   });
