@@ -1,5 +1,7 @@
 <img src="example/snapshots/wcag-contrast/preview.svg"/>
 
+변경 사항이 없는 Pull Request
+
 # 목표
 
 1. 예제로 주어진 [Material-UI Color Palette](https://github.com/iamssen/wcag-contrast-validation-example/blob/master/example/src/style/theme.ts)의 [WCAG Contrast Ratio 접근성을 계산](https://github.com/iamssen/wcag-contrast-validation-example/blob/master/example/src/%40ssen/anlayze-wcag-contrast/analyzeWCAGContrast.tsx)합니다.
