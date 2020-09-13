@@ -1,7 +1,10 @@
-// https://raw.githubusercontent.com/iamssen/wcag-contrast-validation-example/master/example/snapshots/wcag-contrast/preview.json
 import { context } from '@actions/github';
-import { commitComment, issueComment } from 'create-github-comment';
+import { compareWCAGContrastScores } from '@ssen/anlayze-wcag-contrast';
+import { issueComment } from 'create-github-comment';
+import fs from 'fs';
 import fetch from 'node-fetch';
+import path from 'path';
+import { renderToString } from 'react-dom/server';
 
 (async () => {
   const githubToken = process.env.GITHUB_TOKEN;
@@ -9,37 +12,45 @@ import fetch from 'node-fetch';
   const repo = context.payload.repository?.name;
   const issue_number: number | undefined = context.payload.pull_request?.number;
   const commit_sha = context.sha;
-  
+
   if (!githubToken) {
     throw new Error(`Undefined GITHUB_TOKEN`);
-  } else if (!owner || !repo || !commit_sha || typeof issue_number !== 'number') {
+  } else if (
+    !owner ||
+    !repo ||
+    !commit_sha ||
+    typeof issue_number !== 'number'
+  ) {
     throw new Error(`Only run this script on github action of master commit`);
   }
-  
-  // FIXME github does not support <img src="data-uri" />
-  //const { background, primary, secondary, error, warning, info, success } = dark.palette;
-  //
-  //const { svg } = analyzeWCAGContrast({
-  //  backgroundColor: background.default,
-  //  paperColor: background.paper,
-  //  colors: {
-  //    primary: primary.main,
-  //    secondary: secondary.main,
-  //    error: error.main,
-  //    warning: warning.main,
-  //    info: info.main,
-  //    success: success.main,
-  //  },
-  //});
-  //
-  //const image: string = svgToMiniDataURI(renderToString(svg));
-  
-  //await issueComment({
-  //  githubToken,
-  //  owner,
-  //  repo,
-  //  commit_sha,
-  //  stickyComment: `# WCAG CONTRAST RATIO`,
-  //  body: `<img src="https://raw.githubusercontent.com/${owner}/${repo}/${commit_sha}/example/snapshots/wcag-contrast/preview.svg"/>`,
-  //});
+
+  try {
+    const { scores: base } = await fetch(
+      `https://raw.githubusercontent.com/${owner}/${repo}/master/example/snapshots/wcag-contrast/preview.json`,
+    ).then((res) => res.json());
+
+    const { scores: change } = JSON.parse(
+      fs.readFileSync(
+        path.join(process.cwd(), 'snapshots/wcag-contrast/preview.json'),
+        'utf8',
+      ),
+    );
+
+    const { element, changed } = await compareWCAGContrastScores(base, change);
+
+    const elementString = renderToString(element);
+
+    const image: string = changed
+      ? `<img src="https://raw.githubusercontent.com/${owner}/${repo}/${commit_sha}/example/snapshots/wcag-contrast/preview.svg"/>`
+      : `<details><summary>Score</summary><img src="https://raw.githubusercontent.com/${owner}/${repo}/${commit_sha}/example/snapshots/wcag-contrast/preview.svg"/></details>`;
+
+    await issueComment({
+      githubToken,
+      owner,
+      repo,
+      issue_number,
+      stickyComment: `# WCAG CONTRAST RATIO`,
+      body: `${elementString}\n\n${image}`,
+    });
+  } catch (error) {}
 })();
