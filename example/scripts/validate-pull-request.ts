@@ -1,1 +1,2 @@
 //const issue_number: number | undefined = context.payload.pull_request?.number;
+// https://raw.githubusercontent.com/iamssen/wcag-contrast-validation-example/master/example/snapshots/wcag-contrast/preview.json
