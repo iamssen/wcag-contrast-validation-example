@@ -1,3 +1,4 @@
-sample-package:
-  version: 1.1.0
+create-github-comment:
+  version: 0.1.0
   tag: latest
+  module: commonjs
