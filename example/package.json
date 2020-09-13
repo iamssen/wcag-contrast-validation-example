@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.0",
-    "@rocket-scripts/web": "^1.0.9",
+    "@rocket-scripts/web": "^1.1.0",
     "@types/fs-extra": "^9.0.1",
     "@types/jest": "^26.0.13",
     "@types/puppeteer": "^3.0.2",
