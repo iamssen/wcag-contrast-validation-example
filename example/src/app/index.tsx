@@ -35,7 +35,7 @@ function App() {
     <div>
       {svg}
 
-      <pre>{JSON.stringify(scores)}</pre>
+      <pre>{JSON.stringify(scores, null, 2)}</pre>
     </div>
   );
 }
