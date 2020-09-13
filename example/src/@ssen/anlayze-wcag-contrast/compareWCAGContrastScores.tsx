@@ -6,10 +6,10 @@ export interface WCAGContrastScoresDiff {
   changed: boolean;
 }
 
-export async function compareWCAGContrastScores(
+export function compareWCAGContrastScores(
   base: Record<string, Scores>,
   change: Record<string, Scores>,
-): Promise<WCAGContrastScoresDiff> {
+): WCAGContrastScoresDiff {
   const baseKeys: string[] = Object.keys(base);
   const changeKeys: string[] = Object.keys(change);
 
@@ -17,7 +17,11 @@ export async function compareWCAGContrastScores(
 
   const changed: boolean =
     baseKeys.length !== changeKeys.length ||
-    baseKeys.some((key: string) => base[key] !== change[key]);
+    baseKeys.some(
+      (key: string) =>
+        base[key]?.background !== change[key]?.background ||
+        base[key]?.paper !== change[key]?.paper,
+    );
 
   const element: ReactElement = (
     <table>
