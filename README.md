@@ -11,5 +11,5 @@
 
 - [x] WCAG Contrast Ratio Report
 - [x] Git Pre-Commit Hook
-- [ ] Github Sticky Comment Library
+- [x] Github Sticky Comment Library
 - [ ] Github Action Bot

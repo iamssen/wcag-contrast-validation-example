@@ -1,7 +1,15 @@
 {
   "extends": "@rocket-scripts/web/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "create-github-comment": [
+        "../../packages/src/create-github-comment"
+      ],
+      "create-github-comment/*": [
+        "../../packages/src/create-github-comment/*"
+      ]
+    }
   },
   "include": [
     "src",

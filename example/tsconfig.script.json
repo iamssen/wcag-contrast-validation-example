@@ -8,7 +8,15 @@
     "target": "ES2018",
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "create-github-comment": [
+        "../../packages/src/create-github-comment"
+      ],
+      "create-github-comment/*": [
+        "../../packages/src/create-github-comment/*"
+      ]
+    }
   },
   "include": [
     "src",
