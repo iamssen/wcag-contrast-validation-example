@@ -7,30 +7,35 @@ import path from 'path';
 import { renderToString } from 'react-dom/server';
 
 (async () => {
-  const githubToken = process.env.GITHUB_TOKEN;
-  const owner = context.repo.owner;
-  const repo = context.repo.repo;
+  const githubToken: string | undefined = process.env.GITHUB_TOKEN;
+  const base_owner: string | undefined =
+    context.payload.pull_request?.base?.repo?.owner?.login;
+  const base_sha: string | undefined =
+    context.payload.pull_request?.base?.repo?.sha;
+  const send_owner: string = context.actor;
+  const send_sha: string = context.sha;
+  const repo: string | undefined =
+    context.payload.pull_request?.base?.repo?.name;
   const issue_number: number | undefined = context.payload.pull_request?.number;
-  const commit_sha = context.sha;
-
-  console.log('validate-pull-request.ts..()', JSON.stringify(context, null, 2));
 
   if (!githubToken) {
     console.error(`Undefined GITHUB_TOKEN`);
     process.exit(1);
   } else if (
-    !owner ||
+    !base_owner ||
+    !base_sha ||
+    !send_owner ||
+    !send_sha ||
     !repo ||
-    !commit_sha ||
     typeof issue_number !== 'number'
   ) {
-    console.error(`Only run this script on github action of master commit`);
+    console.error(`Only run this script on github action of pull request`);
     process.exit(1);
   }
 
   try {
     const { scores: base } = await fetch(
-      `https://raw.githubusercontent.com/${owner}/${repo}/master/example/snapshots/wcag-contrast/preview.json`,
+      `https://raw.githubusercontent.com/${base_owner}/${repo}/${base_sha}/example/snapshots/wcag-contrast/preview.json`,
     ).then((res) => res.json());
 
     const { scores: change } = JSON.parse(
@@ -45,12 +50,12 @@ import { renderToString } from 'react-dom/server';
     const elementString = renderToString(element);
 
     const image: string = changed
-      ? `<img src="https://raw.githubusercontent.com/${owner}/${repo}/${commit_sha}/example/snapshots/wcag-contrast/preview.svg"/>`
-      : `<details><summary>Score</summary><img src="https://raw.githubusercontent.com/${owner}/${repo}/${commit_sha}/example/snapshots/wcag-contrast/preview.svg"/></details>`;
+      ? `<img src="https://raw.githubusercontent.com/${send_owner}/${repo}/${send_sha}/example/snapshots/wcag-contrast/preview.svg"/>`
+      : `<details><summary>Score</summary><img src="https://raw.githubusercontent.com/${send_owner}/${repo}/${send_sha}/example/snapshots/wcag-contrast/preview.svg"/></details>`;
 
     await issueComment({
       githubToken,
-      owner,
+      owner: base_owner,
       repo,
       issue_number,
       stickyComment: `# WCAG CONTRAST RATIO`,
