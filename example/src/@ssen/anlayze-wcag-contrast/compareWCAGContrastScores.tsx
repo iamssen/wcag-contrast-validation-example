@@ -29,8 +29,8 @@ export function compareWCAGContrastScores(
         <tr>
           <th>color</th>
           <th>base background</th>
-          <th>base paper</th>
           <th>change background</th>
+          <th>base paper</th>
           <th>change paper</th>
         </tr>
       </thead>
@@ -39,8 +39,8 @@ export function compareWCAGContrastScores(
           <tr key={key}>
             <th>{key.toUpperCase()}</th>
             <td>{base[key]?.background ?? '-'}</td>
-            <td>{base[key]?.paper ?? '-'}</td>
             <td>{change[key]?.background ?? '-'}</td>
+            <td>{base[key]?.paper ?? '-'}</td>
             <td>{change[key]?.paper ?? '-'}</td>
           </tr>
         ))}
