@@ -1,4 +1,4 @@
-import { analyzeWCAGContrast } from '@app/anlayze-wcag-contrast';
+import { analyzeWCAGContrast } from '@ssen/anlayze-wcag-contrast';
 import React, { useMemo } from 'react';
 import { render } from 'react-dom';
 import { dark } from 'style/theme';

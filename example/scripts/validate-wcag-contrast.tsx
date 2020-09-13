@@ -1,4 +1,4 @@
-import { analyzeWCAGContrast } from '@app/anlayze-wcag-contrast';
+import { analyzeWCAGContrast } from '@ssen/anlayze-wcag-contrast';
 import { execSync } from 'child_process';
 import fs from 'fs-extra';
 import path from 'path';
