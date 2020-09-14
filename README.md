@@ -27,7 +27,7 @@
 
 <https://www.npmjs.com/package/wcag-contrast>
 
-데이터들을 Programmantic 하게 직접 검증하고 싶다면 해당 Package를 사용할 수 있습니다.
+데이터들을 직접 검증하고 싶다면 해당 Package를 사용할 수 있습니다.
 
 # TODOs
 
